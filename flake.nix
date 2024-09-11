@@ -7,8 +7,9 @@
     nixvim.url = "github:nix-community/nixvim";
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixvim }:
-    flake-utils.lib.eachDefaultSystem (system: 
+  outputs = { self, nixpkgs, flake-utils, nixvim }: {
+      nixvim-config = import ./config;
+    } // flake-utils.lib.eachDefaultSystem (system: 
       let 
         pkgs = import nixpkgs { 
           inherit system; 
