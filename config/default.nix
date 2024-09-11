@@ -19,6 +19,21 @@
       key = "jj";
       action = "<Esc>";
     }
+    { # don't escape visual mode after changing indent (gv re-selects previous block)
+      mode = "v";
+      key = "<";
+      action = "<gv";
+    }
+    {
+      mode = "v";
+      key = ">";
+      action = ">gv";
+    }
+    { # exit visual mode with space
+      mode = "v";
+      key = "<Space>";
+      action = "<Esc>";
+    }
   ];
 
   opts = {
