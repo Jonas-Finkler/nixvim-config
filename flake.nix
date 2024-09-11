@@ -25,6 +25,11 @@
         
         packages.default = nvim;
 
+        packages.nvim = nvim;
+        
+        # create appimage
+        # nix bundle --bundler github:ralismark/nix-appimage ./#nvim
+
         checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
 
         devShells.default = pkgs.mkShell {
