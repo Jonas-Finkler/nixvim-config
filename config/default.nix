@@ -84,15 +84,31 @@
 
   plugins = {
 
+    # vertical lines for indents
     indent-blankline.enable = true;
 
-    # TODO: Change color of TODO
-    todo-comments.enable = true; # highlight todo comments
+    todo-comments = {
+      # provides these highlights:
+      # FIX: 
+      # TODO: 
+      # HACK: 
+      # WARN: 
+      # WARNING: 
+      # PERF: 
+      # XXX: 
+      # INFO: 
+      # NOTE: 
+      # TEST: 
+      enable = true;
+    };
 
-    gitsigns.enable = true;
+    # show git changes on the left side
+    gitsigns.enable = true; 
 
+    # tabs on top
     bufferline.enable = true;
 
+    # fuzzy search
     telescope = {
       enable = true; 
       settings = {
@@ -111,6 +127,7 @@
         };
       };
       keymaps = {
+        # More options to be found here: https://github.com/nvim-telescope/telescope.nvim/blob/master/README.md
         "<leader>f" = {
           action = "find_files";
           options.desc = "Find project files";
@@ -127,82 +144,6 @@
           action = "current_buffer_fuzzy_find";
           options.desc = "Buffer";
         };
-        # "<leader>:" = {
-        #   action = "command_history";
-        #   options.desc = "Command History";
-        # };
-        # "<leader>fr" = {
-        #   action = "oldfiles";
-        #   options.desc = "Recent";
-        # };
-        # "<leader>fb" = {
-        #   action = "buffers";
-        #   options.desc = "Buffers";
-        # };
-        # "<C-p>" = {
-        #   action = "git_files";
-        #   options.desc = "Search git files";
-        # };
-        # "<leader>gc" = {
-        #   action = "git_commits";
-        #   options.desc = "Commits";
-        # };
-        # "<leader>gs" = {
-        #   action = "git_status";
-        #   options.desc = "Status";
-        # };
-        # "<leader>sa" = {
-        #   action = "autocommands";
-        #   options.desc = "Auto Commands";
-        # };
-        # "<leader>sb" = {
-        #   action = "current_buffer_fuzzy_find";
-        #   options.desc = "Buffer";
-        # };
-        # "<leader>sc" = {
-        #   action = "command_history";
-        #   options.desc = "Command History";
-        # };
-        # "<leader>sC" = {
-        #   action = "commands";
-        #   options.desc = "Commands";
-        # };
-        # "<leader>sD" = {
-        #   action = "diagnostics";
-        #   options.desc = "Workspace diagnostics";
-        # };
-        # "<leader>sh" = {
-        #   action = "help_tags";
-        #   options.desc = "Help pages";
-        # };
-        # "<leader>sH" = {
-        #   action = "highlights";
-        #   options.desc = "Search Highlight Groups";
-        # };
-        # "<leader>sk" = {
-        #   action = "keymaps";
-        #   options.desc = "Keymaps";
-        # };
-        # "<leader>sM" = {
-        #   action = "man_pages";
-        #   options.desc = "Man pages";
-        # };
-        # "<leader>sm" = {
-        #   action = "marks";
-        #   options.desc = "Jump to Mark";
-        # };
-        # "<leader>so" = {
-        #   action = "vim_options";
-        #   options.desc = "Options";
-        # };
-        # "<leader>sR" = {
-        #   action = "resume";
-        #   options.desc = "Resume";
-        # };
-        # "<leader>uC" = {
-        #   action = "colorscheme";
-        #   options.desc = "Colorscheme preview";
-        # };
       };
     };
 
