@@ -64,6 +64,8 @@
     cmdheight = 0; # more space for command line
     scrolloff = 8; # keep 8 lines above/below cursor
 
+    globals.mapleader = ","; # change the leader key
+
     # fortran stuff ... haven't tested if this helps
     # fortran_free_source = 1;
     # fortran_do_enddo = 1;
@@ -103,6 +105,21 @@
         fortls.enable = true; # fortran
         jsonls.enable = true; # json
         yamlls.enable = true; # yaml
+      };
+      keymaps = {
+        diagnostic = {
+          "<space>j" = "goto_next";
+          "<space>k" = "goto_prev";
+        };
+        lspBuf = {
+          K = "hover";
+          gr = "references";
+          gd = "definition";
+          gi = "implementation";
+          gt = "type_definition";
+          "<space>ca" = "code_action";
+          "<space>rn" = "rename";
+        };
       };
     };
     # cmp autocomplete
