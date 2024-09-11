@@ -1,7 +1,7 @@
 {lib, pkgs, ...}: {
   imports = [ 
   ];
-
+  # test
   clipboard = {
     register = "unnamedplus"; # put yanked text into system clipboard
     providers = {
@@ -17,7 +17,7 @@
     { # escape insert mode with jj
       mode = "i";
       key = "jj";
-      action = "<Esc>";
+      action = "<esc>";
     }
     { # don't escape visual mode after changing indent (gv re-selects previous block)
       mode = "v";
@@ -31,9 +31,14 @@
     }
     { # exit visual mode with space
       mode = "v";
-      key = "<Space>";
-      action = "<Esc>";
+      key = "<space>";
+      action = "<esc>";
     }
+    # { # switch to next buffer
+    #   mode = "n";
+    #   key = "<leader>bn";
+    #   action = ":bn<cr>";
+    # }
   ];
 
   opts = {
@@ -70,7 +75,7 @@
 
   };
 
-  globals.mapleader = ","; # change the leader key
+  globals.mapleader = " "; # change the leader key to space
 
   colorschemes.onedark = {
     enable = true;
@@ -81,9 +86,125 @@
 
     indent-blankline.enable = true;
 
+    # TODO: Change color of TODO
     todo-comments.enable = true; # highlight todo comments
 
     gitsigns.enable = true;
+
+    bufferline.enable = true;
+
+    telescope = {
+      enable = true; 
+      settings = {
+        defaults = {
+          mappings = {
+            # exit telescope with esc
+            i = {
+              "<esc>" = {
+                __raw = ''
+                  function(...)
+                    return require("telescope.actions").close(...)
+                  end'';
+              };
+            };
+          };
+        };
+      };
+      keymaps = {
+        "<leader>f" = {
+          action = "find_files";
+          options.desc = "Find project files";
+        };
+        "<leader>g" = {
+          action = "live_grep";
+          options.desc = "Grep (root dir)";
+        };
+        "<leader>b" = {
+          action = "buffers";
+          options.desc = "+buffer";
+        };
+        "<leader>cb" = {
+          action = "current_buffer_fuzzy_find";
+          options.desc = "Buffer";
+        };
+        # "<leader>:" = {
+        #   action = "command_history";
+        #   options.desc = "Command History";
+        # };
+        # "<leader>fr" = {
+        #   action = "oldfiles";
+        #   options.desc = "Recent";
+        # };
+        # "<leader>fb" = {
+        #   action = "buffers";
+        #   options.desc = "Buffers";
+        # };
+        # "<C-p>" = {
+        #   action = "git_files";
+        #   options.desc = "Search git files";
+        # };
+        # "<leader>gc" = {
+        #   action = "git_commits";
+        #   options.desc = "Commits";
+        # };
+        # "<leader>gs" = {
+        #   action = "git_status";
+        #   options.desc = "Status";
+        # };
+        # "<leader>sa" = {
+        #   action = "autocommands";
+        #   options.desc = "Auto Commands";
+        # };
+        # "<leader>sb" = {
+        #   action = "current_buffer_fuzzy_find";
+        #   options.desc = "Buffer";
+        # };
+        # "<leader>sc" = {
+        #   action = "command_history";
+        #   options.desc = "Command History";
+        # };
+        # "<leader>sC" = {
+        #   action = "commands";
+        #   options.desc = "Commands";
+        # };
+        # "<leader>sD" = {
+        #   action = "diagnostics";
+        #   options.desc = "Workspace diagnostics";
+        # };
+        # "<leader>sh" = {
+        #   action = "help_tags";
+        #   options.desc = "Help pages";
+        # };
+        # "<leader>sH" = {
+        #   action = "highlights";
+        #   options.desc = "Search Highlight Groups";
+        # };
+        # "<leader>sk" = {
+        #   action = "keymaps";
+        #   options.desc = "Keymaps";
+        # };
+        # "<leader>sM" = {
+        #   action = "man_pages";
+        #   options.desc = "Man pages";
+        # };
+        # "<leader>sm" = {
+        #   action = "marks";
+        #   options.desc = "Jump to Mark";
+        # };
+        # "<leader>so" = {
+        #   action = "vim_options";
+        #   options.desc = "Options";
+        # };
+        # "<leader>sR" = {
+        #   action = "resume";
+        #   options.desc = "Resume";
+        # };
+        # "<leader>uC" = {
+        #   action = "colorscheme";
+        #   options.desc = "Colorscheme preview";
+        # };
+      };
+    };
 
     treesitter = {
       enable = true; # default with all grammar
@@ -108,8 +229,8 @@
       };
       keymaps = {
         diagnostic = {
-          "<space>j" = "goto_next";
-          "<space>k" = "goto_prev";
+          "<leader>j" = "goto_next";
+          "<leader>k" = "goto_prev";
         };
         lspBuf = {
           K = "hover";
@@ -117,8 +238,8 @@
           gd = "definition";
           gi = "implementation";
           gt = "type_definition";
-          "<space>ca" = "code_action";
-          "<space>rn" = "rename";
+          "<leader>ca" = "code_action";
+          "<leader>rn" = "rename";
         };
       };
     };
