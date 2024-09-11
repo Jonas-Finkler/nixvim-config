@@ -79,6 +79,8 @@
 
     indent-blankline.enable = true;
 
+    todo-comments.enable = true; # highlight todo comments
+
     gitsigns.enable = true;
 
     treesitter = {
@@ -114,6 +116,7 @@
     cmp-vsnip.enable = true;
     cmp-zsh.enable = true;
     # lsp-signature.enable = true; # show function signature (plugin does not exist?)
+
   };
 
 }
