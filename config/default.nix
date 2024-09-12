@@ -195,13 +195,28 @@
     cmp = {
       enable = true;
       autoEnableSources = true;
-      settings.sources = [
-        { name = "treesitter"; } # syntax
-        { name = "path"; } # filesystem paths
-        { name = "buffer"; } # vim buffer
-        { name = "nvim_lsp"; } # language server
-        { name = "vsnip"; } # snippets
-      ];
+      settings = {
+        sources = [
+          { name = "treesitter"; } # syntax
+          { name = "path"; } # filesystem paths
+          { name = "buffer"; } # vim buffer
+          { name = "nvim_lsp"; } # language server
+          { name = "vsnip"; } # snippets
+        ];
+        mapping = {
+          "<c-j>" = "cmp.mapping.select_next_item()";
+          "<c-k>" = "cmp.mapping.select_prev_item()";
+          "<tab>" = "cmp.mapping.confirm({ select = true })";
+          # TODO: Figure out if this would be any use
+          # "<c-space>" = "cmp.mapping.complete()";
+          # "<c-h>" = "cmp.mapping.scroll_docs(-4)";
+          # "<c-l>" = "cmp.mapping.scroll_docs(4)";
+          # "<c-e>" = "cmp.mapping.abort()";
+          # "<CR>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+          # "<c-space>" = "cmp.mapping.complete()";
+          # "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+        };
+      };
     };
   };
 }
