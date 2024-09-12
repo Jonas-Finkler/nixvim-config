@@ -34,11 +34,16 @@
       key = "<space>";
       action = "<esc>";
     }
-    # { # switch to next buffer
-    #   mode = "n";
-    #   key = "<leader>bn";
-    #   action = ":bn<cr>";
-    # }
+    { # switch to next buffer
+      mode = "n";
+      key = "<c-w>n";
+      action = ":bn<cr>";
+    }
+    { # switch to previous buffer
+      mode = "n";
+      key = "<c-w>p";
+      action = ":bp<cr>";
+    }
   ];
 
   opts = {
