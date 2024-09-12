@@ -189,18 +189,19 @@
         };
       };
     };
-    # cmp autocomplete
-    cmp.enable = true;
-    cmp-cmdline.enable = true;
-    cmp-treesitter.enable = true;
-    cmp-path.enable = true;
-    cmp-buffer.enable = true;
-    cmp-nvim-lsp.enable = true;
-    cmp-vim-lsp.enable = true;
-    cmp-vsnip.enable = true;
-    cmp-zsh.enable = true;
     # lsp-signature.enable = true; # show function signature (plugin does not exist?)
 
+    # cmp autocomplete
+    cmp = {
+      enable = true;
+      autoEnableSources = true;
+      settings.sources = [
+        { name = "treesitter"; } # syntax
+        { name = "path"; } # filesystem paths
+        { name = "buffer"; } # vim buffer
+        { name = "nvim_lsp"; } # language server
+        { name = "vsnip"; } # snippets
+      ];
+    };
   };
-
 }
