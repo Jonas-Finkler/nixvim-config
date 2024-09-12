@@ -31,6 +31,9 @@
         # create appimage
         # nix bundle --bundler github:ralismark/nix-appimage ./#nvim
 
+        # for an appimage using fuse2 instead of fuse3 (which is not installed on some clusters)
+        # nix bundle --bundler github:Jonas-Finkler/nix-appimage ./#nvim
+
         checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
 
         devShells.default = pkgs.mkShell {
