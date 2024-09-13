@@ -68,6 +68,7 @@
       enable = true; # default with all grammars
       settings = {
         indent.enable = true;
+        highlight.enable = true;
       };
     };
 
