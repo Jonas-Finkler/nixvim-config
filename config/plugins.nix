@@ -30,15 +30,20 @@
       enable = true; 
       settings = {
         defaults = {
-          mappings = {
-            # exit telescope with esc
+          mappings = let 
+            exit_fn = ''
+              function(...)
+                return require("telescope.actions").close(...)
+              end'';
+          in {
+            # exit telescope with esc or <c-e> (use jj to exit insert mode)
             i = {
-              "<esc>" = {
-                __raw = ''
-                  function(...)
-                    return require("telescope.actions").close(...)
-                  end'';
-              };
+              "<esc>".__raw = exit_fn;
+              "<c-e>".__raw = exit_fn;
+            };
+            n = {
+              "<esc>".__raw = exit_fn;
+              "<c-e>".__raw = exit_fn;
             };
           };
         };
