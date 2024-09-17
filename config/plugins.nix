@@ -119,16 +119,17 @@
       autoEnableSources = true;
       settings = {
         sources = [
-          { name = "treesitter"; } # syntax
-          { name = "path"; } # filesystem paths
+          { name = "copilot"; } # copilot (requires the copilot-lua plugin below)
           { name = "buffer"; } # vim buffer
+          { name = "treesitter"; } # syntax
           { name = "nvim_lsp"; } # language server
+          { name = "path"; } # filesystem paths
           { name = "vsnip"; } # snippets
         ];
         mapping = {
           "<c-j>" = "cmp.mapping.select_next_item()";
           "<c-k>" = "cmp.mapping.select_prev_item()";
-          "<tab>" = "cmp.mapping.confirm({ select = true })";
+          "<tab>" = "cmp.mapping.confirm({ select = true })"; # NOTE: Use shift and tab to insert whitespace without triggering cmp
           # TODO: Figure out if this would be any use
           # "<c-space>" = "cmp.mapping.complete()";
           # "<c-h>" = "cmp.mapping.scroll_docs(-4)";
@@ -141,6 +142,56 @@
       };
     };
 
-    copilot-vim.enable = true;
+    copilot-lua = {
+      # Authenticate with :Copilot auth
+      enable = true;
+      panel.enabled = false;
+      suggestion.enabled = false;
+    }; 
+
+    # original copilot plugin. Does not integrate with cmp, but is also nice.
+    # copilot-vim.enable = true;
+
+    copilot-chat = {
+      enable = true;
+      settings = {
+        model = "gpt-4o";
+        context = "buffers";
+        question_header = "  Jonas ";
+        answer_header =   "  Copilot ";
+        show_help = false;
+        auto_insert_mode = true; # start in insert mode in new chat
+
+        window = {
+          layout = "vertical";  # opens to the right because of "set splitright"
+          # looks nice but is less practical
+          # layout = "float"; 
+          # relative = "editor";
+          # border = "rounded";
+        };
+
+        mappings = {
+          close = {
+            insert = "<c-e>";
+            normal = "<c-e>";
+          };
+          reset = {
+            insert = "<c-r>";
+            normal = "<c-r>";
+          };
+          submit_prompt = {
+            insert = "<c-space>";
+            normal = "<c-space>";
+          };
+          show_diff = {
+            normal = "gd";
+          };
+          complete = {
+            # to not override the normal tab completion (couldn't figure out what this one actually does)
+            insert = "";
+          }; 
+        };
+      };
+    };
   };
 }

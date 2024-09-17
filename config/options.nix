@@ -36,6 +36,7 @@
     showmode = false; # dont show mode
     cmdheight = 0; # more space for command line
     scrolloff = 8; # keep 8 lines above/below cursor
+    splitright = true; # open new panes to the right (also the copilot chat)
 
     # fortran stuff ... haven't tested if this helps
     # fortran_free_source = 1;

@@ -32,5 +32,23 @@
       key = "<c-w>p";
       action = ":bp<cr>";
     }
+    { # open copilot chat
+      mode = "n";
+      key = "<leader>cc";
+      action.__raw = ''
+        function()
+          require("CopilotChat").open()
+        end
+      '';
+    }
+    { # open copilot chat
+      mode = "v";
+      key = "<leader>cc";
+      action.__raw = ''
+        function()
+          require("CopilotChat").open()
+        end
+      '';
+    }
   ];
 }
