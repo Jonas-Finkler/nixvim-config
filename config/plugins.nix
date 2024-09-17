@@ -95,6 +95,7 @@
         diagnostic = {
           "<leader>j" = "goto_next";
           "<leader>k" = "goto_prev";
+          "<leader>d" = "open_float";  # open diagnostics float
         };
         lspBuf = {
           K = "hover";
@@ -103,7 +104,10 @@
           gi = "implementation";
           gt = "type_definition";
           "<leader>ca" = "code_action";
+          "<leader>sh" = "signature_help";
           "<leader>rn" = "rename";
+          "<leader>wa" = "add_workspace_folder";
+          "<leader>wr" = "remove_workspace_folder";
         };
       };
     };
@@ -136,5 +140,7 @@
         };
       };
     };
+
+    copilot-vim.enable = true;
   };
 }

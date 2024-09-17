@@ -13,6 +13,9 @@
       let 
         pkgs = import nixpkgs { 
           inherit system; 
+          config = {
+            allowUnfree = true;
+          };
         };
 
         nixvim' = nixvim.legacyPackages.${system};
