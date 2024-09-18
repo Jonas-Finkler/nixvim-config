@@ -32,6 +32,11 @@
       key = "<c-w>p";
       action = ":bp<cr>";
     }
+    { # close buffer
+      mode = "n";
+      key = "<c-w>x";
+      action = ":bw<cr>";
+    }
     { # open copilot chat
       mode = "n";
       key = "<leader>cc";
