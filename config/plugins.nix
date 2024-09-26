@@ -25,6 +25,9 @@
     # tabs on top
     bufferline.enable = true;
 
+    # Type :MarkdownPreview to open a nice preview in the browser
+    markdown-preview.enable = true;
+
     # fuzzy search
     telescope = {
       enable = true; 
