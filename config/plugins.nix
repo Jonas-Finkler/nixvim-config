@@ -98,7 +98,7 @@
         diagnostic = {
           "<leader>j" = "goto_next";
           "<leader>k" = "goto_prev";
-          "<leader>d" = "open_float";  # open diagnostics float
+          "<leader>e" = "open_float";  # for some reason "<leader>d" does not work here
         };
         lspBuf = {
           K = "hover";
