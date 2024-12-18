@@ -72,6 +72,11 @@
       };
     };
 
+    # needed by telescope and bufferline
+    web-devicons = {
+      enable = true;
+    };
+
     treesitter = {
       enable = true; # default with all grammars
       settings = {
@@ -83,7 +88,7 @@
     lsp = {
       enable = true;
       servers = {
-        nil-ls.enable = true; # nix
+        nil_ls.enable = true; # nix
         ltex = { # latex
           enable = true;
           settings.language = "en-US";
