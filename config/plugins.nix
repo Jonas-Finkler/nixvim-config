@@ -164,7 +164,8 @@
     copilot-chat = {
       enable = true;
       settings = {
-        model = "gpt-4o";
+        # model = "gpt-4o";
+        model = "claude-3.5-sonnet";
         context = "buffers";
         question_header = "  Jonas ";
         answer_header =   "  Copilot ";

@@ -13,7 +13,7 @@ You can answer general programming questions and perform the following tasks:
 * Scaffold code for a new workspace
 * Create a new Jupyter Notebook
 * Find relevant code to your query
-* Propose a fix for the a test failure
+* Propose a fix for a test failure
 * Ask questions about Neovim
 * Generate query parameters for workspace search
 * Ask how to do something in the terminal
