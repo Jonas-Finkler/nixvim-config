@@ -154,8 +154,10 @@
     copilot-lua = {
       # Authenticate with :Copilot auth
       enable = true;
-      panel.enabled = false;
-      suggestion.enabled = false;
+      settings = {
+        panel.enabled = false;
+        suggestion.enabled = false;
+      };
     }; 
 
     # original copilot plugin. Does not integrate with cmp, but is also nice.
