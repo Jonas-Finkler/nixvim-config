@@ -94,7 +94,7 @@ A declarative Neovim configuration using [nixvim](https://github.com/nix-communi
 
 ## Key Mappings
 
-Leader key is <Space>
+Leader key is `<Space>`
 
 ### File Navigation
 - `<leader>f` - Find files in project
