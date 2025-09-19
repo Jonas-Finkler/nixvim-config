@@ -166,17 +166,18 @@
     copilot-chat = {
       enable = true;
       settings = {
-        # model = "gpt-4o";
-        model = "claude-3.5-sonnet";
-        context = "buffers";
-        question_header = "  Jonas ";
-        answer_header =   "  Copilot ";
+        model = "claude-sonnet-4";
+        resources = ["buffers" "selection" "glob"];
+        headers = {
+          user = "  Jonas ";
+          assistant =   "  Copilot ";
+        };
         show_help = false;
         auto_insert_mode = true; # start in insert mode in new chat
 
         # adapted from default prompt
         # NOTE: The plugin expects a piece of lua code, therefore this is wrapped in [[]] to make it a multiline lua string
-        system_prompt = "[[${builtins.readFile ./copilotPrompt.txt}]]";
+        # system_prompt = "[[${builtins.readFile ./copilotPrompt.txt}]]";
 
         window = {
           layout = "vertical";  # opens to the right because of "set splitright"
