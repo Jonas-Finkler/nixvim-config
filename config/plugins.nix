@@ -166,7 +166,7 @@
     copilot-chat = {
       enable = true;
       settings = {
-        model = "claude-sonnet-4";
+        model = "claude-sonnet-4.5";
         resources = ["buffers" "selection" "glob"];
         headers = {
           user = "  Jonas ";
