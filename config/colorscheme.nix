@@ -1,6 +1,9 @@
 {
   colorschemes.onedark = {
     enable = true;
-    settings.style = "warmer";
+    settings = {
+      style = "warmer";
+      transparent = true;
+    };
   };
 }
