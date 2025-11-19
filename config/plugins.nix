@@ -81,7 +81,10 @@
       enable = true; # default with all grammars
       settings = {
         indent.enable = true;
-        highlight.enable = true;
+        highlight = {
+          enable = true;
+          disable = [ "latex" ]; # latex highlighting is broken
+        };
       };
     };
 
