@@ -83,7 +83,6 @@
         indent.enable = true;
         highlight = {
           enable = true;
-          disable = [ "latex" ]; # latex highlighting is broken
         };
       };
     };
