@@ -100,6 +100,7 @@
         fortls.enable = true; # fortran
         jsonls.enable = true; # json
         yamlls.enable = true; # yaml
+        jdtls.enable = true; # java (there is also a jdtls plugin with more features
       };
       keymaps = {
         diagnostic = {
@@ -159,6 +160,7 @@
       settings = {
         panel.enabled = false;
         suggestion.enabled = false;
+        telemetry.telemetryLevel = "off";
       };
     }; 
 
