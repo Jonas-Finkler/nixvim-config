@@ -168,7 +168,7 @@
     copilot-chat = {
       enable = true;
       settings = {
-        model = "claude-sonnet-4.5";
+        # model = "claude-sonnet-4.5";
         resources = ["buffers" "selection" "glob"];
         question_header = "  Jonas ";
         answer_header =   "  Copilot ";
