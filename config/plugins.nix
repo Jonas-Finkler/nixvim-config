@@ -79,12 +79,10 @@
 
     treesitter = {
       enable = true; # default with all grammars
-      settings = {
+      # settings = {
         indent.enable = true;
-        highlight = {
-          enable = true;
-        };
-      };
+        highlight.enable = true;
+      # };
     };
 
     lsp = {
@@ -172,10 +170,8 @@
       settings = {
         model = "claude-sonnet-4.5";
         resources = ["buffers" "selection" "glob"];
-        headers = {
-          user = "  Jonas ";
-          assistant =   "  Copilot ";
-        };
+        question_header = "  Jonas ";
+        answer_header =   "  Copilot ";
         show_help = false;
         auto_insert_mode = true; # start in insert mode in new chat
 
