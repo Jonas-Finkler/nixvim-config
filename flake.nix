@@ -57,6 +57,12 @@
           '';
         };
 
+        overlays = [
+          (final: prev: {
+            inherit nvim;
+          })
+        ];
+
       }
   );
 }
