@@ -99,6 +99,11 @@
         jsonls.enable = true; # json
         yamlls.enable = true; # yaml
         jdtls.enable = true; # java (there is also a jdtls plugin with more features
+        rust_analyzer = { # rust
+          enable = true;
+          installRustc = true;
+          installCargo = true;
+        };
       };
       keymaps = {
         diagnostic = {
