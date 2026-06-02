@@ -2,7 +2,7 @@
   description = "My personal nixvim configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim";
     # BUG: Changing to stable channels because unstable is a bit buggy (TreeSitter): 
     # - Comments in python are highlighted and not greyed out
