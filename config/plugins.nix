@@ -102,6 +102,11 @@
         jsonls.enable = true; # json
         yamlls.enable = true; # yaml
         jdtls.enable = true; # java (there is also a jdtls plugin with more features
+        rust_analyzer = { # rust
+          enable = true;
+          installRustc = true;
+          installCargo = true;
+        };
       };
       keymaps = {
         diagnostic = {
@@ -126,44 +131,43 @@
     };
     # lsp-signature.enable = true; # show function signature (plugin does not exist?)
 
-    # cmp autocomplete
-    cmp = {
+    # blink.cmp — completion menu (replaces nvim-cmp).
+    # Copilot suggestions show up as a source in the menu via blink-copilot.
+    blink-cmp = {
       enable = true;
-      autoEnableSources = true;
       settings = {
-        sources = [
-          { name = "copilot"; } # copilot (requires the copilot-lua plugin below)
-          { name = "buffer"; } # vim buffer
-          { name = "treesitter"; } # syntax
-          { name = "nvim_lsp"; } # language server
-          { name = "path"; } # filesystem paths
-          { name = "vsnip"; } # snippets
-        ];
-        mapping = {
-          "<c-j>" = "cmp.mapping.select_next_item()";
-          "<c-k>" = "cmp.mapping.select_prev_item()";
-          "<tab>" = "cmp.mapping.confirm({ select = true })"; # NOTE: Use shift and tab to insert whitespace without triggering cmp
-          # TODO: Figure out if this would be any use
-          # "<c-space>" = "cmp.mapping.complete()";
-          # "<c-h>" = "cmp.mapping.scroll_docs(-4)";
-          # "<c-l>" = "cmp.mapping.scroll_docs(4)";
-          # "<c-e>" = "cmp.mapping.abort()";
-          # "<CR>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-          # "<c-space>" = "cmp.mapping.complete()";
-          # "<S-CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })";
+        keymap = {
+          preset = "default";
+          "<C-j>" = [ "select_next" "fallback" ];
+          "<C-k>" = [ "select_prev" "fallback" ];
+          "<Tab>" = [ "accept" "fallback" ];
+        };
+        completion.documentation.auto_show = true;
+        signature.enabled = true;
+        sources = {
+          default = [ "lsp" "path" "snippets" "buffer" "copilot" ];
+          providers.copilot = {
+            name = "copilot";
+            module = "blink-copilot";
+            async = true;
+            score_offset = 100;
+          };
         };
       };
     };
+    blink-copilot.enable = true;
 
     copilot-lua = {
-      # Authenticate with :Copilot auth
+      # Authenticate with :Copilot auth.
+      # Suggestion ghost-text disabled because completions now come through
+      # blink-copilot into the blink.cmp menu.
       enable = true;
       settings = {
         panel.enabled = false;
         suggestion.enabled = false;
         telemetry.telemetryLevel = "off";
       };
-    }; 
+    };
 
     # original copilot plugin. Does not integrate with cmp, but is also nice.
     # copilot-vim.enable = true;

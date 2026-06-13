@@ -1,4 +1,6 @@
 {pkgs, ...}: {
+  extraPackages = [ pkgs.rustfmt ];
+
   clipboard = {
     register = "unnamedplus"; # put yanked text into system clipboard
     providers = {
