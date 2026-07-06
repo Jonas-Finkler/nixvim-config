@@ -1,4 +1,10 @@
-{
+{pkgs, ...}: {
+  # Regex syntax highlighting for justfiles. The treesitter `just` grammar is
+  # stale (chokes on x"..." shell-expanded strings and expression-valued
+  # settings, cascading into the rest of the file), so we use vim-just and
+  # disable treesitter highlighting for `just` below.
+  extraPlugins = [ pkgs.vimPlugins.vim-just ];
+
   plugins = {
 
     # vertical lines for indents
@@ -82,6 +88,7 @@
       # settings = {
         indent.enable = true;
         highlight.enable = true;
+        highlight.disable = [ "just" ]; # use vim-just instead (grammar is stale)
       # };
     };
 
