@@ -138,6 +138,10 @@
           "<C-j>" = [ "select_next" "fallback" ];
           "<C-k>" = [ "select_prev" "fallback" ];
           "<Tab>" = [ "accept" "fallback" ];
+          # <C-n> opens/toggles the completion menu (manual trigger).
+          "<C-n>" = [ "show" "show_documentation" "hide_documentation" ];
+          # Release <C-Space> so copilot-chat can use it to submit its prompt.
+          "<C-space>" = [ "fallback" ];
         };
         completion.documentation.auto_show = true;
         signature.enabled = true;
