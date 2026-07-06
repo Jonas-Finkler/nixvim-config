@@ -88,7 +88,10 @@
     lsp = {
       enable = true;
       servers = {
-        nil_ls.enable = true; # nix
+        nil_ls = { # nix
+          enable = true;
+          settings."nil".nix.flake.autoArchive = true;
+        };
         ltex = { # latex
           enable = true;
           settings.language = "en-US";
