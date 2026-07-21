@@ -30,11 +30,19 @@
           module = import ./config;
         };
         nvim = nixvim'.makeNixvimWithModule nixvimModule;
+
+        # Light build: same config with the heavy language servers dropped
+        # (see config/default.nix). For headless/low-space hosts like the Pi.
+        nvim-light = nixvim'.makeNixvimWithModule {
+          inherit pkgs;
+          module = { imports = [ (import ./config) ]; profile.light = true; };
+        };
       in {
-        
+
         packages.default = nvim;
 
         packages.nvim = nvim;
+        packages.nvim-light = nvim-light;
         
         # create appimage
         # nix bundle --bundler github:ralismark/nix-appimage ./#nvim
@@ -59,7 +67,7 @@
 
         overlays = [
           (final: prev: {
-            inherit nvim;
+            inherit nvim nvim-light;
           })
         ];
 

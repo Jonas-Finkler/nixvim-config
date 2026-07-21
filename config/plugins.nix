@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{pkgs, lib, config, ...}:
+let
+  full = !config.profile.light; # heavy servers/plugins only in the full profile
+in {
   # Regex syntax highlighting for justfiles. The treesitter `just` grammar is
   # stale (chokes on x"..." shell-expanded strings and expression-valued
   # settings, cascading into the rest of the file), so we use vim-just and
@@ -31,8 +34,8 @@
     # tabs on top
     bufferline.enable = true;
 
-    # Type :MarkdownPreview to open a nice preview in the browser
-    markdown-preview.enable = true;
+    # Type :MarkdownPreview to open a nice preview in the browser (pulls node)
+    markdown-preview.enable = full;
 
     # fuzzy search
     telescope = {
@@ -95,13 +98,16 @@
     lsp = {
       enable = true;
       servers = {
-        nil_ls = { # nix
+        nil_ls = { # nix — tiny, kept in the light profile too
           enable = true;
           # NixVim already namespaces these under the ["nil"] settings key, so
           # do NOT wrap them in another "nil" (that double-nesting silently
           # disabled autoArchive and made nil nag on every Nix file).
           settings.nix.flake.autoArchive = true;
         };
+      # Heavy language servers — each drags in a full toolchain (clang/llvm,
+      # rustc/cargo, openjdk, node, ...). Full profile only; see default.nix.
+      } // lib.optionalAttrs full {
         ltex = { # latex
           enable = true;
           settings.language = "en-US";
@@ -159,23 +165,25 @@
         completion.documentation.auto_show = true;
         signature.enabled = true;
         sources = {
-          default = [ "lsp" "path" "snippets" "buffer" "copilot" ];
-          providers.copilot = {
-            name = "copilot";
-            module = "blink-copilot";
-            async = true;
-            score_offset = 100;
+          default = [ "lsp" "path" "snippets" "buffer" ] ++ lib.optional full "copilot";
+          providers = lib.optionalAttrs full {
+            copilot = {
+              name = "copilot";
+              module = "blink-copilot";
+              async = true;
+              score_offset = 100;
+            };
           };
         };
       };
     };
-    blink-copilot.enable = true;
+    blink-copilot.enable = full;
 
     copilot-lua = {
       # Authenticate with :Copilot auth.
       # Suggestion ghost-text disabled because completions now come through
       # blink-copilot into the blink.cmp menu.
-      enable = true;
+      enable = full;
       settings = {
         panel.enabled = false;
         suggestion.enabled = false;
@@ -187,7 +195,7 @@
     # copilot-vim.enable = true;
 
     copilot-chat = {
-      enable = true;
+      enable = full;
       settings = {
         # model = "claude-sonnet-4.5";
         resources = ["buffers" "selection" "glob"];
