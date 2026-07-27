@@ -14,7 +14,13 @@
 
   outputs = { self, nixpkgs, flake-utils, nixvim }: {
       nixvim-config = import ./config;
-    } // flake-utils.lib.eachDefaultSystem (system: 
+
+      # Overlays are not per-system, so they live outside eachDefaultSystem.
+      # Expose the flake's nvim package (built per-system with allowUnfree).
+      overlays.default = final: prev: {
+        nvim = self.packages.${prev.stdenv.hostPlatform.system}.nvim;
+      };
+    } // flake-utils.lib.eachDefaultSystem (system:
       let 
         pkgs = import nixpkgs { 
           inherit system; 
@@ -56,12 +62,6 @@
             exec zsh
           '';
         };
-
-        overlays = [
-          (final: prev: {
-            inherit nvim;
-          })
-        ];
 
       }
   );
