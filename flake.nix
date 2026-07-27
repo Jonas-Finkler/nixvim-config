@@ -18,7 +18,7 @@
       # Overlays are not per-system, so they live outside eachDefaultSystem.
       # Expose the flake's nvim package (built per-system with allowUnfree).
       overlays.default = final: prev: {
-        nvim = self.packages.${prev.stdenv.hostPlatform.system}.nvim;
+        inherit (self.packages.${prev.stdenv.hostPlatform.system}) nvim nvim-light;
       };
     } // flake-utils.lib.eachDefaultSystem (system:
       let 
@@ -36,11 +36,19 @@
           module = import ./config;
         };
         nvim = nixvim'.makeNixvimWithModule nixvimModule;
+
+        # Light build: same config with the heavy language servers dropped
+        # (see config/default.nix). For headless/low-space hosts like the Pi.
+        nvim-light = nixvim'.makeNixvimWithModule {
+          inherit pkgs;
+          module = { imports = [ (import ./config) ]; profile.light = true; };
+        };
       in {
-        
+
         packages.default = nvim;
 
         packages.nvim = nvim;
+        packages.nvim-light = nvim-light;
         
         # create appimage
         # nix bundle --bundler github:ralismark/nix-appimage ./#nvim

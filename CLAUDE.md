@@ -65,6 +65,8 @@ All plugins live in `config/plugins.nix`. NixVim wraps nixvim plugin options und
 
 Configured in `config/plugins.nix` under `programs.nixvim.plugins.lsp.servers`. Currently enabled: `nil_ls` (Nix), `ltex` (LaTeX/prose), `pyright` (Python), `clangd` (C/C++), `fortls` (Fortran), `jsonls`, `yamlls`, `jdtls` (Java).
 
+**Gotcha — server `settings` namespacing:** NixVim already wraps a server's `settings` under that server's own config key. For `nil_ls` it emits `settings = { ["nil"] = { ... } }` for you, so write `settings.nix.flake.autoArchive = true;` — NOT `settings."nil".nix...`. Adding the server key yourself double-nests it (`settings.nil.nil.nix...`), the LSP silently never sees the option, and it may keep nagging (e.g. nil's "enable auto-archive" prompt on every Nix file). To verify what actually reaches the server, build with `nix build .#nvim` and grep the generated `init.lua` (path is in `result/bin/nvim`) for the setting.
+
 ## Known Issues (tracked in flake.nix comments)
 
 Currently pinned to `nixos-unstable`. Two known Treesitter regressions on this channel:

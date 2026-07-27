@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  extraPackages = [ pkgs.rustfmt ];
+{pkgs, lib, config, ...}: {
+  # rustfmt drags in the whole Rust + LLVM toolchain (~1.9 GiB); full profile only.
+  extraPackages = lib.optional (!config.profile.light) pkgs.rustfmt;
 
   clipboard = {
     register = "unnamedplus"; # put yanked text into system clipboard
