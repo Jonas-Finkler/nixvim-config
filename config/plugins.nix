@@ -31,6 +31,9 @@ in {
     # show git changes on the left side
     gitsigns.enable = true;
 
+    # :DiffviewOpen / :DiffviewFileHistory — side-by-side diffs in their own tab
+    diffview.enable = true;
+
     # :Bwipeout — like :bw, but keeps the window layout
     bufdelete.enable = true;
 
