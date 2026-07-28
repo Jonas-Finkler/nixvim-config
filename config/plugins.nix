@@ -49,7 +49,19 @@ in {
       enable = true;
       settings = {
         close_if_last_window = true; # never leave a lone tree window behind
-        window.width = 30;
+        window = {
+          width = 30;
+          # Unbind neo-tree's <space> = toggle_node. It is declared nowait=false
+          # so leader combos keep working, which means every press waits out
+          # timeoutlen (1s). <cr> toggles directories anyway, with no delay.
+          mappings = {
+            "<space>" = "none";
+            # hjkl navigation: l expands/opens, h collapses (or jumps to the
+            # parent and collapses it). l was focus_preview; P still previews.
+            "l" = "open";
+            "h" = "close_node";
+          };
+        };
         # Must be explicit: neo-tree passes an unset value straight to
         # log.use_file(), and only a literal `false` disables the log file.
         log_to_file = false;
