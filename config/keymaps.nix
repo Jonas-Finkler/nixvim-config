@@ -37,6 +37,16 @@
       key = "<c-w>x";
       action = ":bw<cr>";
     }
+    { # toggle file tree
+      mode = "n";
+      key = "<leader>t";
+      action = "<cmd>Neotree toggle<cr>";
+    }
+    { # open file tree on the current file
+      mode = "n";
+      key = "<leader>T";
+      action = "<cmd>Neotree reveal<cr>";
+    }
     { # open copilot chat
       mode = "n";
       key = "<leader>cc";

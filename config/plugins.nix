@@ -32,7 +32,33 @@ in {
     gitsigns.enable = true; 
 
     # tabs on top
-    bufferline.enable = true;
+    bufferline = {
+      enable = true;
+      settings.options.offsets = [
+        {
+          filetype = "neo-tree";
+          text = "File Explorer";
+          highlight = "Directory";
+          separator = true;
+        }
+      ];
+    };
+
+    # file tree — closed by default, toggled with <leader>t
+    neo-tree = {
+      enable = true;
+      settings = {
+        close_if_last_window = true; # never leave a lone tree window behind
+        window.width = 30;
+        # Must be explicit: neo-tree passes an unset value straight to
+        # log.use_file(), and only a literal `false` disables the log file.
+        log_to_file = false;
+        filesystem = {
+          follow_current_file.enabled = true;
+          filtered_items.hide_dotfiles = false;
+        };
+      };
+    };
 
     # Type :MarkdownPreview to open a nice preview in the browser (pulls node)
     markdown-preview.enable = full;
