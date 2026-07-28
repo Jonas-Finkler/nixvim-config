@@ -32,10 +32,19 @@
       key = "<c-w>p";
       action = ":bp<cr>";
     }
-    { # close buffer
+    { # close buffer, keeping the window layout
+      # `y`, not `x`: a <c-w>x that lands after timeoutlen runs the builtin, which swaps windows.
       mode = "n";
-      key = "<c-w>x";
-      action = ":bw<cr>";
+      key = "<c-w>y";
+      action.__raw = ''
+        function()
+          -- no-op in neo-tree/help/etc. so those buffers can't be wiped
+          if vim.fn.buflisted(vim.api.nvim_get_current_buf()) ~= 1 then
+            return
+          end
+          require("bufdelete").bufwipeout(0)
+        end
+      '';
     }
     { # toggle file tree
       mode = "n";

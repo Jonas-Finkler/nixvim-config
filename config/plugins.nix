@@ -29,7 +29,10 @@ in {
     };
 
     # show git changes on the left side
-    gitsigns.enable = true; 
+    gitsigns.enable = true;
+
+    # :Bwipeout — like :bw, but keeps the window layout
+    bufdelete.enable = true;
 
     # tabs on top
     bufferline = {
