@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim";
-    # BUG: Changing to stable channels because unstable is a bit buggy (TreeSitter):
-    # - Comments in python are highlighted and not greyed out
-    # - Highlighting in LaTeX is broken
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    # nixvim.url = "github:nix-community/nixvim/nixos-25.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
