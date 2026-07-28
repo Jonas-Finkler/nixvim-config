@@ -53,7 +53,7 @@ in {
       settings = {
         close_if_last_window = true; # never leave a lone tree window behind
         window = {
-          width = 30;
+          width = 40; # `e` in the tree toggles fit-to-content and back
           # Unbind neo-tree's <space> = toggle_node. It is declared nowait=false
           # so leader combos keep working, which means every press waits out
           # timeoutlen (1s). <cr> toggles directories anyway, with no delay.
