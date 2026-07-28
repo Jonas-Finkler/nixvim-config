@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim";
-    # BUG: Changing to stable channels because unstable is a bit buggy (TreeSitter): 
+    # BUG: Changing to stable channels because unstable is a bit buggy (TreeSitter):
     # - Comments in python are highlighted and not greyed out
     # - Highlighting in LaTeX is broken
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -12,55 +12,61 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixvim }: {
+  outputs = { self, nixpkgs, flake-utils, nixvim }:
+    let
+      # Light build: same config with the heavy language servers dropped
+      # (see config/default.nix). For headless/low-space hosts like the Pi.
+      lightModule = { imports = [ (import ./config) ]; profile.light = true; };
+
+      # One definition, shared by the overlay and packages.*. Needs a pkgs with
+      # allowUnfree (copilot).
+      mkNvim = pkgs: module:
+        nixvim.legacyPackages.${pkgs.stdenv.hostPlatform.system}.makeNixvimWithModule {
+          inherit pkgs module;
+        };
+    in
+    {
       nixvim-config = import ./config;
 
       # Overlays are not per-system, so they live outside eachDefaultSystem.
-      # Expose the flake's nvim package (built per-system with allowUnfree).
+      # Built from `final`, so nvim reuses the consumer's package set instead of
+      # instantiating a second nixpkgs.
       overlays.default = final: prev: {
-        inherit (self.packages.${prev.stdenv.hostPlatform.system}) nvim nvim-light;
+        nvim = mkNvim final (import ./config);
+        nvim-light = mkNvim final lightModule;
       };
     } // flake-utils.lib.eachDefaultSystem (system:
-      let 
-        pkgs = import nixpkgs { 
-          inherit system; 
+      let
+        # Standalone use (nix run, appimage bundles): apply our own overlay to
+        # our own nixpkgs, so packages.* and the overlay can't drift.
+        pkgs = import nixpkgs {
+          inherit system;
           config = {
             allowUnfree = true;
           };
-        };
-
-        nixvim' = nixvim.legacyPackages.${system};
-        nixvimLib = nixvim.lib.${system};
-        nixvimModule = {
-          inherit pkgs;
-          module = import ./config;
-        };
-        nvim = nixvim'.makeNixvimWithModule nixvimModule;
-
-        # Light build: same config with the heavy language servers dropped
-        # (see config/default.nix). For headless/low-space hosts like the Pi.
-        nvim-light = nixvim'.makeNixvimWithModule {
-          inherit pkgs;
-          module = { imports = [ (import ./config) ]; profile.light = true; };
+          overlays = [ self.overlays.default ];
         };
       in {
 
-        packages.default = nvim;
+        packages = {
+          inherit (pkgs) nvim nvim-light;
+          default = pkgs.nvim;
+        };
 
-        packages.nvim = nvim;
-        packages.nvim-light = nvim-light;
-        
         # create appimage
         # nix bundle --bundler github:ralismark/nix-appimage ./#nvim
 
         # for an appimage using fuse2 instead of fuse3 (which is not installed on some clusters)
         # nix bundle --bundler github:Jonas-Finkler/nix-appimage ./#nvim
 
-        checks.default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
+        checks.default = nixvim.lib.${system}.check.mkTestDerivationFromNixvimModule {
+          inherit pkgs;
+          module = import ./config;
+        };
 
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            nvim
+            pkgs.nvim
           ];
 
           shellHook = ''
