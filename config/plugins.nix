@@ -116,6 +116,12 @@ in {
           action = "current_buffer_fuzzy_find";
           options.desc = "Buffer";
         };
+        # LSP references with preview + fuzzy filtering (replaces vim.lsp.buf.references,
+        # which dumps into the quickfix list)
+        "gr" = {
+          action = "lsp_references";
+          options.desc = "Find usages (LSP references)";
+        };
       };
     };
 
@@ -170,7 +176,8 @@ in {
         };
         lspBuf = {
           K = "hover";
-          gr = "references";
+          # gr is bound to telescope's lsp_references instead (see telescope.keymaps).
+          # An lspBuf mapping here would be buffer-local on LspAttach and shadow it.
           gd = "definition";
           gD = "declaration";
           gi = "implementation";
