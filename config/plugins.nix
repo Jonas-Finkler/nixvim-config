@@ -248,7 +248,8 @@ in {
     copilot-chat = {
       enable = full;
       settings = {
-        # model = "claude-sonnet-4.5";
+        # Only model our Copilot Business plan exposes; the plugin default (gpt-5-mini) is rejected.
+        model = "gpt-5.3-codex";
         resources = ["buffers" "selection" "glob"];
         question_header = "  Jonas ";
         answer_header =   "  Copilot ";
