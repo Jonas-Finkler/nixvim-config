@@ -38,11 +38,9 @@ in {
     # show git changes on the left side
     gitsigns.enable = true;
 
-    # :DiffviewOpen / :DiffviewFileHistory — side-by-side diffs in their own tab
-    diffview.enable = true;
-
-    # diff view and popup UI for review.nvim (see extraPlugins)
+    # :CodeDiff, also the diff view under review.nvim (see extraPlugins)
     codediff.enable = true;
+    # popup UI for review.nvim
     nui.enable = true;
 
     # :Bwipeout — like :bw, but keeps the window layout
