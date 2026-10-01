@@ -39,7 +39,21 @@ in {
     gitsigns.enable = true;
 
     # :CodeDiff, also the diff view under review.nvim (see extraPlugins)
-    codediff.enable = true;
+    codediff = {
+      enable = true;
+      settings = {
+        # ~10% onedark green/red over the background; DiffAdd/DiffDelete are barely visible
+        highlights = {
+          line_insert = "#2e322e";
+          line_delete = "#362a2e";
+        };
+        # match neo-tree
+        keymaps.explorer = {
+          select = [ "<CR>" "l" ];
+          fold_close = [ "zc" "h" ];
+        };
+      };
+    };
     # popup UI for review.nvim
     nui.enable = true;
 
