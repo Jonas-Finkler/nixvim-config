@@ -142,8 +142,6 @@
 \end{keys}
 \note{Opens in a vertical split on the right, in insert mode. Buffers, selection and glob are available as resources (\texttt{\#buffers}, \texttt{\#selection}). Full profile only; run \texttt{:Copilot auth} once.}
 
-\columnbreak
-
 \section{Git}
 \begin{keys}
 \key{]c} / \key{[c} & next / previous hunk (gitsigns) \\
@@ -154,6 +152,26 @@
 \texttt{:DiffviewClose}       & close the diff tab \\
 \end{keys}
 \note{In diffview: \key{<tab>} next file, \key{<s-tab>} previous, \key{g?} help.}
+
+\columnbreak
+
+\section{Code review (review.nvim)}
+\begin{keys}
+\key{<leader>rr}    & review working tree \\
+\key{<leader>rc}    & review commits (picker) \\
+\key{<leader>rb}    & review branch against main \\
+\key{<leader>ra}    & note on line / selection, any file \\
+\key{<leader>re} / \key{<leader>rd} & edit / delete note at cursor \\
+\key{<leader>rx}    & export comments to clipboard \\
+\end{keys}
+\subhead{Inside the review}
+\begin{keys}
+\key{i}             & add comment (\textsc{v}: range) \\
+\key{e} / \key{d}   & edit / delete comment \\
+\key{]n} / \key{[n} & next / previous comment \\
+\key{c} / \key{C}   & list / export comments \\
+\key{q}             & close: export, then archive \\
+\end{keys}
 
 \section{Windows \& splits (vim defaults)}
 \begin{keys}

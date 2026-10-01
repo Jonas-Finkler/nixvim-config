@@ -6,7 +6,14 @@ in {
   # stale (chokes on x"..." shell-expanded strings and expression-valued
   # settings, cascading into the rest of the file), so we use vim-just and
   # disable treesitter highlighting for `just` below.
-  extraPlugins = [ pkgs.vimPlugins.vim-just ];
+  extraPlugins = [
+    pkgs.vimPlugins.vim-just
+    (pkgs.callPackage ../pkgs/review-nvim.nix { }) # :Review
+  ];
+  extraPackages = [ (pkgs.callPackage ../pkgs/codediff-watcher.nix { }) ];
+  extraConfigLua = ''
+    require("review").setup({})
+  '';
 
   plugins = {
 
@@ -33,6 +40,10 @@ in {
 
     # :DiffviewOpen / :DiffviewFileHistory — side-by-side diffs in their own tab
     diffview.enable = true;
+
+    # diff view and popup UI for review.nvim (see extraPlugins)
+    codediff.enable = true;
+    nui.enable = true;
 
     # :Bwipeout — like :bw, but keeps the window layout
     bufdelete.enable = true;

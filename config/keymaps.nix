@@ -56,6 +56,15 @@
       key = "<leader>T";
       action = "<cmd>Neotree reveal<cr>";
     }
+    # review.nvim; <leader>rn is LSP rename, so notes go on <leader>ra
+    { mode = "n"; key = "<leader>rr"; action = "<cmd>Review<cr>"; options.desc = "Review working tree"; }
+    { mode = "n"; key = "<leader>rc"; action = "<cmd>Review commits<cr>"; options.desc = "Review commits"; }
+    { mode = "n"; key = "<leader>rb"; action = "<cmd>Review branch<cr>"; options.desc = "Review branch"; }
+    # `:` so visual mode becomes :'<,'>Review note
+    { mode = [ "n" "v" ]; key = "<leader>ra"; action = ":Review note<cr>"; options.desc = "Review: note here"; }
+    { mode = "n"; key = "<leader>re"; action = "<cmd>Review edit<cr>"; options.desc = "Review: edit comment"; }
+    { mode = "n"; key = "<leader>rd"; action = "<cmd>Review delete<cr>"; options.desc = "Review: delete comment"; }
+    { mode = "n"; key = "<leader>rx"; action = "<cmd>Review export<cr>"; options.desc = "Review: export"; }
     { # open copilot chat
       mode = "n";
       key = "<leader>cc";
