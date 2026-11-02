@@ -181,9 +181,10 @@ in {
       # Heavy language servers — each drags in a full toolchain (clang/llvm,
       # rustc/cargo, openjdk, node, ...). Full profile only; see default.nix.
       } // lib.optionalAttrs full {
-        ltex = { # latex
+        ltex_plus = { # latex
           enable = true;
-          settings.language = "en-US";
+          package = pkgs.ltex-ls-plus; # unpackaged in nixvim
+          settings.ltex.language = "en-US";
         };
         pyright.enable = true; # python
         clangd.enable = true; # C/C++

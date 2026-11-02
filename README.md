@@ -9,7 +9,7 @@ A declarative Neovim configuration using [nixvim](https://github.com/nix-communi
   - Python (pyright)
   - C/C++ (clangd)
   - Fortran (fortls)
-  - LaTeX (ltex)
+  - LaTeX (ltex-plus)
   - JSON/YAML
 - **AI Assistance** via GitHub Copilot with:
   - Inline completions (copilot-lua)
@@ -57,7 +57,7 @@ A declarative Neovim configuration using [nixvim](https://github.com/nix-communi
   - Python (pyright)
   - C/C++ (clangd)
   - Fortran (fortls)
-  - LaTeX (ltex)
+  - LaTeX (ltex-plus)
   - JSON/YAML
 - **nvim-cmp** - Smart code completion with multiple sources:
   - Copilot suggestions
