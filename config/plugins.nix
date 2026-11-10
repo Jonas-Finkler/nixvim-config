@@ -53,6 +53,10 @@ in {
           select = [ "<CR>" "l" ];
           fold_close = [ "zc" "h" ];
         };
+        keymaps.view = {
+          next_hunk = "<C-n>";
+          prev_hunk = "<C-p>";
+        };
       };
     };
     # popup UI for review.nvim
