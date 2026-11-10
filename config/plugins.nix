@@ -47,6 +47,7 @@ in {
           line_insert = "#2e322e";
           line_delete = "#362a2e";
         };
+        diff.cycle_hunks_across_files = true;
         # match neo-tree
         keymaps.explorer = {
           select = [ "<CR>" "l" ];
